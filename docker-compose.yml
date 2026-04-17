@@ -1,0 +1,47 @@
+services:
+
+  orderservice:
+    restart: always
+    build:
+      context: .
+      dockerfile: OrderService/Dockerfile
+    container_name: orderservice
+    ports:
+      - "5003:80"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=OrderDb;User Id=sa;Password=CDev005#8;TrustServerCertificate=True;
+      - RabbitMQ__Host=rabbitmq
+
+  paymentservice:
+    restart: always
+    build:
+      context: .
+      dockerfile: PaymentService/Dockerfile
+    container_name: paymentservice
+    ports:
+      - "5004:80"
+    depends_on:
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMQ__Host=rabbitmq
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      - SA_PASSWORD=CDev005#8
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
