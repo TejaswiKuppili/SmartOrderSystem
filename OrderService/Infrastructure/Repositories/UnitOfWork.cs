@@ -12,6 +12,10 @@ namespace OrderService.Infrastructure.Repositories
             _context = context;
         }
 
+        /// <summary>
+        /// Encapsulates database commit operation by saving all tracked changes in the DbContext
+        /// </summary>
+        /// <returns></returns>
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();

@@ -14,6 +14,11 @@ namespace OrderService.Infrastructure.Repositories
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Handles order persistence using raw SQL with a transaction, inserting the order and its items
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         public async Task<Guid> CreateOrderWithTransactionAsync(Order order)
         {
             using var connection = new SqlConnection(

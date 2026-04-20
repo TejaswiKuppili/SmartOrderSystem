@@ -1,5 +1,8 @@
 namespace OrderService.Domain.Entities
 {
+    /// <summary>
+    /// Represents an individual item within an order, including product details, quantity, and price
+    /// </summary>
     public class OrderItem
     {
         public Guid Id { get; set; }

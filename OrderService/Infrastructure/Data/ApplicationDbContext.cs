@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace OrderService.Infrastructure.Data
 {
+    /// <summary>
+    /// Represents the EF Core database context for managing Order and OrderItem entities
+    /// </summary>
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

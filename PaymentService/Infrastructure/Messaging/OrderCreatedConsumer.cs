@@ -18,6 +18,12 @@ namespace PaymentService.Infrastructure.Messaging
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Background service that consumes OrderCreated events from RabbitMQ and processes payment asynchronously
+        /// </summary>
+        /// <param name="stoppingToken"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var factory = new ConnectionFactory()

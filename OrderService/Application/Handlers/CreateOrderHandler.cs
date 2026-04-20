@@ -18,6 +18,12 @@ namespace OrderService.Application.Handlers
             EventBus = eventBus;
         }
 
+        /// <summary>
+        /// Handles the CreateOrderCommand by building the order, saving it transactionally, and publishing an OrderCreated event
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var order = new Order

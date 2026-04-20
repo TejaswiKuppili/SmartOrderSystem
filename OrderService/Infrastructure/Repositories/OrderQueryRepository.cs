@@ -18,6 +18,11 @@ namespace OrderService.Infrastructure.Repositories
         private IDbConnection CreateConnection()
             => new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
 
+        /// <summary>
+        /// Retrieves orders for a user using a SQL join and maps results into order aggregates with their items
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Order>> GetOrdersByUserId(string userId)
         {
             var query = @"

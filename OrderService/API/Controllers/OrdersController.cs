@@ -17,6 +17,12 @@ namespace OrderService.API.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Retrieves all orders for a given user ID using the query repository
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="queryRepo"></param>
+        /// <returns></returns>
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetOrders(string userId,
     [FromServices] IOrderQueryRepository queryRepo)
@@ -25,6 +31,11 @@ namespace OrderService.API.Controllers
             return Ok(orders);
         }
 
+        /// <summary>
+        /// Creates a new order using MediatR and returns the generated order ID
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateOrder(CreateOrderDto dto)
         {
